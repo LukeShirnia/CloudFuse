@@ -1,0 +1,20 @@
+---
+- name: Make sure mountpoint exists
+  file:
+    path: '{{ mountpoint }}'
+    state: directory
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - cloudfuse_mountpoint
+
+- name: Creating fstab entry and mouting
+  mount:
+    path: '{{ mountpoint }}'
+    src: "cloudfuse"
+    state: mounted
+    fstype: fuse
+  tags:
+    - cloudfuse
+    - cloudfuse_mount

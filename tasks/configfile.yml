@@ -1,0 +1,22 @@
+---
+- name: Configure rackspace configuration file
+  template:
+    src: rackspace.j2
+    dest: /root/.cloudfuse
+    owner: root
+    group: root
+    mode: '0600'
+  when: rackspace
+  tags:
+    - rack_cloudfuse_file
+
+- name: Configure openstack configuration file
+  template:
+    src: openstack.j2
+    dest: /root/.cloudfuse
+    owner: root
+    group: root
+    mode: '0600'
+  when: openstack
+  tags:
+    - openstack_cloudfuse_file

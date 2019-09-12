@@ -1,0 +1,33 @@
+---
+- name: ./configure cloudfuse
+  command: './configure'
+  args:
+    chdir: /tmp/cloudfuse
+  when: cf_clone is defined
+  register: cf_configure
+  #when: cf_git is defined
+  tags:
+    - cloudfuse_clone
+
+- name: DEBUG
+  debug:
+    msg: "var is {{ cf_configure  }}"
+  tags:
+    - cloudfuse_clone
+
+- name: Make cloudfuse
+  make:
+    chdir: /tmp/cloudfuse
+  #when: cf_configure is defined
+  when: cf_configure is defined
+  register: cf_make
+  tags:
+    - cloudfuse_clone
+
+- name: Make install cloudfuse
+  make:
+    chdir: /tmp/cloudfuse
+    target: install
+  tags:
+    - cloudfuse_clone
+  when: cf_make is defined

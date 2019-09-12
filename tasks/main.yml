@@ -1,0 +1,8 @@
+---
+# tasks file for cloudfuse
+- import_tasks: dependencies.yml
+- import_tasks: gitclone.yml
+- import_tasks: makecloudfuse.yml
+- import_tasks: cleanup.yml
+- import_tasks: configfile.yml
+- import_tasks: mounting.yml

@@ -1,0 +1,13 @@
+---
+# defaults file for cloudfuse
+rackspace: True
+openstack: False
+
+mountpoint: /mnt/cloudfuse
+
+rackspace_username: "rackspace_username"
+rackspace_api_key: "rackspace_api_key"
+
+openstack_user: "openstack_user"
+openstack_tenant: "openstack_tenant"
+openstack_password: "openstack_password"
