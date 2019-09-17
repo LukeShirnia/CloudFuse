@@ -1,6 +1,5 @@
 ---
-- name: Install cloudfuse dependencies
-  yum:
+- yum:
     state: latest
     name: 
       - git
@@ -15,4 +14,4 @@
   tags:
     - cloudfuse_dependencies
     - cloudfuse
-  when: ansible_distribution == "CentOS" or nsible_distribution == 'Red Hat Enterprise Linux'
+  when: ansible_distribution == "CentOS" or ansible_distribution == 'Red Hat Enterprise Linux'

@@ -17,12 +17,12 @@ openstack: False
 
 mountpoint: /mnt/cloudfuse
 
-rackspace_username: "test rackspace"
-rackspace_api_key: "test key"
+rackspace_username: "rackspace_username"
+rackspace_api_key: "rackspace_api_key"
 
-openstack_user: "test openstack"
-openstack_tenant: "test tenant"
-openstack_password: "test password"
+openstack_user: "openstack_user"
+openstack_tenant: "openstack_tenant"
+openstack_password: "openstack_password"
 ```
 
 

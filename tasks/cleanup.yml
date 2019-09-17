@@ -1,9 +1,0 @@
----
-- name: Clearing up /tmp/cloudfuse
-  file:
-    state: absent
-    path: /tmp/cloudfuse
-  tags:
-    - cloudfuse
-    - cloudfuse_cleanup
-    - cloudfuse_clone

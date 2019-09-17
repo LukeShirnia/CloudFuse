@@ -1,8 +1,16 @@
 ---
 # tasks file for cloudfuse
-- import_tasks: dependencies.yml
-- import_tasks: gitclone.yml
-- import_tasks: makecloudfuse.yml
-- import_tasks: cleanup.yml
-- import_tasks: configfile.yml
-- import_tasks: mounting.yml
+- name: Install cloudfuse dependencies
+  import_tasks: cloudfuse_deps.yml
+  tags:
+    - cf_deps
+- name: Building cloudfuse
+  import_tasks: building_cloudfuse.yml
+  tags:
+    - cf_build
+- name: Creating Cloudfuse configuration file
+  import_tasks: create_cloudfuse_config.yml
+- name: Creating and mounting cloudfuse
+  import_tasks: mount_cloudfuse.yml
+  tags:
+    - cf_mount
