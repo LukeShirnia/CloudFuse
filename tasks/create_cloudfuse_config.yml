@@ -8,7 +8,7 @@
     mode: '0600'
   when: rackspace
   tags:
-    - rack_cf_config
+    - cf_rack_config
 
 - name: Configure openstack configuration file
   template:
@@ -19,4 +19,4 @@
     mode: '0600'
   when: openstack
   tags:
-    - openstack_cf_config
+    - cf_openstack_config

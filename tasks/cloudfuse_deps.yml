@@ -1,5 +1,6 @@
 ---
-- yum:
+- name: Installing deps for RedHat OS family
+  yum:
     state: latest
     name: 
       - git
@@ -11,7 +12,19 @@
       - libxml2-devel
       - openssl-devel
       - json-c-devel
-  tags:
-    - cloudfuse_dependencies
-    - cloudfuse
-  when: ansible_distribution == "CentOS" or ansible_distribution == 'Red Hat Enterprise Linux'
+  when: ansible_os_family == "RedHat"
+
+- name: Installing deps for Debian OS family
+  apt:
+    state: latest
+    update_cache: yes
+    name:
+      - build-essential
+      - libcurl4-openssl-dev
+      - libxml2
+      - libxml2-dev
+      - libssl-dev
+      - libfuse-dev
+      - libjson-c-dev
+      - git
+  when: ansible_os_family == 'Debian'

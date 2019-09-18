@@ -4,7 +4,7 @@
     path: /usr/local/bin/cloudfuse
   register: cf_exists
   tags:
-    - cloudfuse_clone
+    - cf_clone
 
 - name: Downloading cloudfuse from github to /tmp/
   git:
@@ -15,34 +15,36 @@
   register: cf_download
   when: cf_exists.stat.exists == False
   tags:
-    - cloudfuse_clone
+    - cf_clone
   check_mode: no
 
 - name: Running ./configure on files
   command: './configure'
   args:
     chdir: /tmp/cloudfuse
+  when: cf_exists.stat.exists == False
   tags:
-    - cloudfuse_clone
+    - cf_clone
 
 - name: Running "make" on files
   make:
     chdir: /tmp/cloudfuse
+  when: cf_exists.stat.exists == False
   tags:
-    - cloudfuse_clone
+    - cf_clone
 
 - name: Running "make install" on files
   make:
     chdir: /tmp/cloudfuse
     target: install
+  when: cf_exists.stat.exists == False
   tags:
-    - cloudfuse_clone
+    - cf_clone
 
 - name: Clearing up old files
   file:
     state: absent
     path: /tmp/cloudfuse
   tags:
-    - cloudfuse
-    - cloudfuse_cleanup
-    - cloudfuse_clone
+    - cf_cleanup
+    - cf_clone

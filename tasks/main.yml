@@ -1,5 +1,11 @@
 ---
 # tasks file for cloudfuse
+- name: Skip if OS is supported
+  fail:
+    msg: This system is not supported
+  when: ansible_os_family != "RedHat" and ansible_os_family != "Debian"
+  tags:
+    - always
 - name: Install cloudfuse dependencies
   import_tasks: cloudfuse_deps.yml
   tags:
@@ -10,6 +16,8 @@
     - cf_build
 - name: Creating Cloudfuse configuration file
   import_tasks: create_cloudfuse_config.yml
+  tags:
+    - cf_config_file
 - name: Creating and mounting cloudfuse
   import_tasks: mount_cloudfuse.yml
   tags:
