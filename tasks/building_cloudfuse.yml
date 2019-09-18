@@ -6,40 +6,38 @@
   tags:
     - cf_clone
 
-- name: Downloading cloudfuse from github to /tmp/
-  git:
-    repo: https://github.com/redbo/cloudfuse.git
-    dest: /tmp/cloudfuse
-    clone: yes
-    update: yes
-  register: cf_download
-  when: cf_exists.stat.exists == False
-  tags:
-    - cf_clone
-  check_mode: no
+- block:
+  - name: Downloading cloudfuse from github to /tmp/
+    git:
+      repo: https://github.com/redbo/cloudfuse.git
+      dest: /tmp/cloudfuse
+      clone: yes
+      update: yes
+    register: cf_download
+    tags:
+      - cf_clone
+    check_mode: no
 
-- name: Running ./configure on files
-  command: './configure'
-  args:
-    chdir: /tmp/cloudfuse
-  when: cf_exists.stat.exists == False
-  tags:
-    - cf_clone
+  - name: Running ./configure on files
+    command: './configure'
+    args:
+      chdir: /tmp/cloudfuse
+    tags:
+      - cf_clone
 
-- name: Running "make" on files
-  make:
-    chdir: /tmp/cloudfuse
-  when: cf_exists.stat.exists == False
-  tags:
-    - cf_clone
+  - name: Running "make" on files
+    make:
+      chdir: /tmp/cloudfuse
+    tags:
+      - cf_clone
 
-- name: Running "make install" on files
-  make:
-    chdir: /tmp/cloudfuse
-    target: install
+  - name: Running "make install" on files
+    make:
+      chdir: /tmp/cloudfuse
+      target: install
+    tags:
+      - cf_clone
   when: cf_exists.stat.exists == False
-  tags:
-    - cf_clone
 
 - name: Clearing up old files
   file:
